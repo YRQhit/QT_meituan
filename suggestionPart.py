@@ -4,25 +4,65 @@ import pandas as pd
 from PyQt5.QtWidgets import QApplication, QDialog, QVBoxLayout, QLabel
 import sys
 import json
-class TextDialog(QDialog):
-    def __init__(self,ID):
-        super().__init__()
-        self.setWindowTitle('评论页面')
-        self.layout = QVBoxLayout(self)
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+# class Suggest_Dialog(object):
+#     def setupUi(self, Dialog, ID):
+#         # self.setWindowTitle('评论页面')
+#         Dialog.setObjectName("AI 小助手")
+#         Dialog.resize(500, 500)
+#
+#         self.label = QtWidgets.QLabel(Dialog)
+#         # self.label.setGeometry(QtCore.QRect(0,0, 350, 100))
+#         self.label.setObjectName("label")
+#         # self.layout = QVBoxLayout(self)
+#         text = self.getTEXT(ID)
+#         self.process_text(text)
+#         QtCore.QMetaObject.connectSlotsByName(Dialog)
+#         # 设置样式表
+#         Dialog.setStyleSheet("background-color: #ffffff ;")
+#         from PyQt5.QtGui import QIcon
+#         Dialog.setWindowIcon(QIcon("util/huohuo.png"))
+#     def retranslateUi(self, Dialog):
+#         _translate = QtCore.QCoreApplication.translate
+#         Dialog.setWindowTitle(_translate("Dialog", "智能小助手"))
+class Suggest_Dialog(object):
+    def setupUi(self, Dialog, ID):
+        # 设置窗口标题为 "智能小助手"
+        Dialog.setWindowTitle("智能小助手")
+        Dialog.setObjectName("AI 小助手")
+        Dialog.resize(500, 500)
+
+        self.label = QtWidgets.QLabel(Dialog)
+        self.label.setObjectName("label")
+
         text = self.getTEXT(ID)
         self.process_text(text)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        Dialog.setStyleSheet("background-color: #ffffff ;")
+        from PyQt5.QtGui import QIcon
+        Dialog.setWindowIcon(QIcon("util/huohuo.png"))
 
+    def retranslateUi(self, Dialog):
+        _translate = QtCore.QCoreApplication.translate
+        Dialog.setWindowTitle(_translate("Dialog", "智能小助手"))
     def process_text(self, data):
         content = data['data']['choices'][0]['content']
         advantages, disadvantages = self.extract_advantages_and_disadvantages(content)
-
-        self.layout.addWidget(QLabel('优点：'))
-        for advantage in advantages:
-            self.layout.addWidget(QLabel(advantage))
-
-        self.layout.addWidget(QLabel('缺点：'))
-        for disadvantage in disadvantages:
-            self.layout.addWidget(QLabel(disadvantage))
+        advresult = ""
+        disadvresult = ""
+        for adv in advantages:
+            advresult = advresult +"\n" + adv
+        for disadv in disadvantages:
+            disadvresult = disadvresult + "\n" + disadv
+        self.label.setText("优点有:"+advresult + "\n" + "缺点有:" + disadvresult)
+        # self.layout.addWidget(QLabel())
+        # for advantage in advantages:
+        #     self.layout.addWidget(QLabel(advantage))
+        #
+        # self.layout.addWidget(QLabel('缺点：'))
+        # for disadvantage in disadvantages:
+        #     self.layout.addWidget(QLabel(disadvantage))
 
     def extract_advantages_and_disadvantages(self, text):
         parts = text.split('\\n\\n缺点：\\n')
@@ -76,7 +116,7 @@ class TextDialog(QDialog):
             text.append(jsoncon)
             return text
 
-        question = getText("user", "分点概述，从下面的评论中得到这个产品的优势和缺点,给出商品改进建议"+comment)
+        question = getText("user", "分点概述，从下面的评论中得到这个产品的优势和缺点"+comment)
         response = zhipuai.model_api.invoke(
             model=model,
             prompt=question
@@ -86,6 +126,11 @@ class TextDialog(QDialog):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    widget = TextDialog("10099263767130")
-    widget.show()
+    # widget = Suggest_Dialog("10099263767130")
+    # widget.show()
+    ID = "10099263767130"
+    dialog = QDialog()
+    ui = Suggest_Dialog()
+    ui.setupUi(dialog, ID)
+    dialog.show()
     sys.exit(app.exec_())

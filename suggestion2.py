@@ -40,7 +40,9 @@ class Suggest_Dialog(object):
         result = self.returnResult(ID)
         text = self.extract_advantages_and_disadvantages(result)
         self.textBrowser.setText(text)
-
+        Dialog.setStyleSheet("background-color: #ffffff ;")
+        from PyQt5.QtGui import QIcon
+        Dialog.setWindowIcon(QIcon("util/huohuo.png"))
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "智能小助手"))

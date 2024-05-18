@@ -21,6 +21,7 @@ class WordListWidget(QWidget):
         super().__init__(parent)
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
+        # self.setStyleSheet("background-color: #ffffff ;")
 
     def display_wordlist(self, word_dict):
         self.clear_layout()
@@ -37,7 +38,7 @@ class WordListWidget(QWidget):
 class WordCloudDialog(QDialog):
     def __init__(self, ID):
         super().__init__()
-        self.setWindowTitle("WordCloud in QDialog")
+        self.setWindowTitle("词云")
         #图片
         self.wordcloudWidget = WordCloudWidget()
         #词频列表
@@ -74,7 +75,7 @@ class WordCloudDialog(QDialog):
 
         # Generate wordcloud
         self.generate_wordcloud(ID)
-
+        self.setStyleSheet("background-color: #ffffff ;")
     def generate_wordcloud(self, ID):
         filename = f'productId={ID}.csv'
         directory = "comments"

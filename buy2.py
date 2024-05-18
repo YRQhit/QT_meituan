@@ -28,12 +28,12 @@ class Buy_Form(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.pushButton_2 = QtWidgets.QPushButton(self.verticalLayoutWidget)
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.verticalLayout.addWidget(self.pushButton_2)
-        self.pushButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
-        self.pushButton.setObjectName("pushButton")
-        self.verticalLayout.addWidget(self.pushButton)
+        self.ButtonGetAdvantage = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.ButtonGetAdvantage.setObjectName("ButtonGetAdvantage")
+        self.verticalLayout.addWidget(self.ButtonGetAdvantage)
+        self.ButtonCompare = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.ButtonCompare.setObjectName("ButtonCompare")
+        self.verticalLayout.addWidget(self.ButtonCompare)
         self.pushButton_3 = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.pushButton_3.setObjectName("pushButton_3")
         self.verticalLayout.addWidget(self.pushButton_3)
@@ -56,26 +56,56 @@ class Buy_Form(object):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
+        self.ButtonGetAdvantage.clicked.connect(self.getAdvantagePage)
+        self.ButtonCompare.clicked.connect(self.analysis)
+        self.pushButton_3.clicked.connect(self.recommandpart)
+        from PyQt5.QtGui import QIcon
+        Dialog.setWindowIcon(QIcon("util/huohuo.png"))
+        Dialog.setStyleSheet("background-color: #ffffff ;")
+
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.label_5.setText(_translate("Dialog", "功能描述："))
+        Dialog.setWindowTitle(_translate("Dialog", "AI Choice"))
+        # self.label_5.setText(_translate("Dialog", "功能描述："))
         self.label.setText(_translate("Dialog", "请选择需要的功能"))
-        self.pushButton_2.setText(_translate("Dialog", "一键获得商品优缺点"))
-        self.pushButton.setText(_translate("Dialog", "商品对比助手"))
+        self.ButtonGetAdvantage.setText(_translate("Dialog", "一键获得商品优缺点"))
+        self.ButtonCompare.setText(_translate("Dialog", "商品对比助手"))
         self.pushButton_3.setText(_translate("Dialog", "爆款好物推荐"))
-        self.label_3.setText(_translate("Dialog", "一键获得商品优缺点：\n"
-"1.\n"
-"2.\n"
-"3."))
-        self.label_4.setText(_translate("Dialog", "商品对比助手：\n"
-"1.\n"
-"2.\n"
-"3."))
-        self.label_2.setText(_translate("Dialog", "爆款好物推荐：\n"
-"1.\n"
-"2.\n"
-"3."))
+#         self.label_3.setText(_translate("Dialog", "一键获得商品优缺点：\n"
+# "一键快看\n"
+# "大数据分析商品优缺点\n"
+# "您购物的好帮手"))
+#         self.label_4.setText(_translate("Dialog", "商品对比助手：\n"
+# "还在犹豫吗?\n"
+# "还在纠结吗?\n"
+# "那就来试试这个功能"))
+#         self.label_2.setText(_translate("Dialog", "好物推荐：\n"
+# "一键推荐好物\n"
+# "帮您不用纠结\n"
+# "包您满意"))
+    def getAdvantagePage(self):
+        from getAdvantage import getAdvantage_Dialog
+        self.optimal_dialog = QDialog()
+        ui = getAdvantage_Dialog()
+        ui.setupUi(self.optimal_dialog)
+        self.optimal_dialog.exec_()
+
+    def analysis(self):
+        print("进行分析")
+        from compareAnalysis import compareAnalysis_Dialog
+        self.optimal_dialog = QDialog()
+        ui = compareAnalysis_Dialog()
+        ui.setupUi(self.optimal_dialog)
+        self.optimal_dialog.exec_()
+
+    def recommandpart(self):
+        from recommand import recommand_Dialog
+        self.dialog = QDialog()
+
+        # 使用 Sale_Form 类来设置界面
+        ui = recommand_Dialog()
+        ui.setupUi(self.dialog)
+        self.dialog.exec_()
 
 if __name__ == "__main__":
     QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)

@@ -61,23 +61,25 @@ class Sale_Form(object):
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
-
+        Dialog.setStyleSheet("background-color: #ffffff ;")
+        from PyQt5.QtGui import QIcon
+        Dialog.setWindowIcon(QIcon("util/huohuo.png"))
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "商家小助手"))
-        self.label_5.setText(_translate("Dialog", "功能描述："))
-        self.label_3.setText(_translate("Dialog", "市场洞察：\n"
-"1.\n"
-"2.\n"
-"3."))
-        self.label_4.setText(_translate("Dialog", "商品数据及优化：\n"
-"1.\n"
-"2.\n"
-"3."))
-        self.label_2.setText(_translate("Dialog", "竞品分析：\n"
-"1.\n"
-"2.\n"
-"3."))
+#         self.label_5.setText(_translate("Dialog", "功能描述："))
+#         self.label_3.setText(_translate("Dialog", "市场洞察：\n"
+# "洞察市场\n"
+# "帮助调研\n"
+# "找准时机入场!"))
+#         self.label_4.setText(_translate("Dialog", "商品数据及优化：\n"
+# "查看顾客反馈\n"
+# "改进定价策略\n"
+# "优化产品布局!"))
+#         self.label_2.setText(_translate("Dialog", "竞品分析：\n"
+# "对比竞争商品信息\n"
+# "发现商机\n"
+# "快人一步!"))
         self.pushButton_2.setText(_translate("Dialog", "市场洞察"))
         self.pushButton.setText(_translate("Dialog", "商品数据及优化"))
         self.pushButton_3.setText(_translate("Dialog", "竞品分析"))

@@ -29,7 +29,7 @@ class Optimal_Dialog(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.label_2 = QtWidgets.QLabel(self.horizontalLayoutWidget)
         self.label_2.setObjectName("label_2")
-        self.label_2.setFixedSize(300, 200)
+        self.label_2.setFixedSize(200, 200)
         self.horizontalLayout.addWidget(self.label_2)
         self.textEdit = QtWidgets.QTextEdit(self.horizontalLayoutWidget)
         # self.textEdit.setFixedSize(300, 300)
@@ -89,6 +89,10 @@ class Optimal_Dialog(object):
         self.KeyWord.clicked.connect(self.ciyun)
         self.EmotionScore.clicked.connect(self.emotion)
         self.Suggestion.clicked.connect(self.suggestion)
+
+        Dialog.setStyleSheet("background-color: #ffffff ;")
+        from PyQt5.QtGui import QIcon
+        Dialog.setWindowIcon(QIcon("util/huohuo.png"))
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "优化平台"))

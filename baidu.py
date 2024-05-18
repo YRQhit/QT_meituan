@@ -164,7 +164,7 @@ def image_to_base64(image_path, max_size=4096, min_short_side=15):
 
 def main():
     url = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/image2text/fuyu_8b?access_token=" + get_access_token()
-    image_path = "Picture/1311981.jpg"
+    image_path = "Picture/100060887464.jpg"
 
     # payload = json.dumps({
     #     "prompt": "what the picture say",
@@ -173,7 +173,7 @@ def main():
     #
 
     payload = json.dumps({
-        "prompt": "what the picture say",
+        "prompt": "给这个图片写一个广告",
         "image": image_to_base64(image_path)
     })
     headers = {
@@ -182,9 +182,9 @@ def main():
     # print(payload)
     response = requests.request("POST", url, headers=headers, data=payload)
 
-    print(response.text)
-
-
+    # print(response.text)
+    # print(response)
+    return json.loads(response.text)["result"]
 if __name__ == '__main__':
     main()
 

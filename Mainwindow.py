@@ -25,43 +25,52 @@ class Worker(QObject):
 
 class Mainwindows(object):
     def setupUi(self, Form):
+        # 窗体设置
         Form.setObjectName("Form")
         Form.resize(406, 300)
         Form.setMaximumSize(QtCore.QSize(406, 300))
+        # 水平布局设置
         self.horizontalLayoutWidget = QtWidgets.QWidget(Form)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(30, 140, 331, 51))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
+        # 按钮设置
         self.sale = QtWidgets.QPushButton(self.horizontalLayoutWidget)
         self.sale.setObjectName("sale")
         self.horizontalLayout.addWidget(self.sale)
         self.buy = QtWidgets.QPushButton(self.horizontalLayoutWidget)
         self.buy.setObjectName("buy")
         self.horizontalLayout.addWidget(self.buy)
+        # 标签设置
         self.label = QtWidgets.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(10, 210, 391, 51))
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(Form)
         self.label_2.setGeometry(QtCore.QRect(80, 30, 241, 41))
+
         font = QtGui.QFont()
         font.setFamily("楷体")
         font.setPointSize(28)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
-
+        # 界面初始化
         self.retranslateUi(Form)
-
+        # 按钮连接信号槽
         self.buy.clicked.connect(self.show_buy)
 
         self.sale.clicked.connect(self.show_sale)
+        # 设置样式表
+        Form.setStyleSheet("background-color: #ffffff ;")
+        from PyQt5.QtGui import QIcon
+        Form.setWindowIcon(QIcon("util/huohuo.png"))
 
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "主页"))
+        Form.setWindowTitle(_translate("Form", "AI Choice"))
         self.sale.setText(_translate("Form", "我是商家"))
         self.buy.setText(_translate("Form", "我是消费者"))
         self.label.setText(_translate("Form", "1.软件采用MIT协议进行开源\n"))
@@ -92,7 +101,7 @@ class Mainwindows(object):
         thread.start()
 
     def show_buy(self):
-        from buy2 import Buy_Form
+        from buy3 import Buy_Form
 
         # 在每次点击按钮时检查是否已经存在对话框对象，如果存在则直接显示，否则创建新的对话框对象
         # if not self.dialog:
@@ -108,7 +117,7 @@ class Mainwindows(object):
 
     def show_sale(self):
 
-        from sale2 import Sale_Form
+        from sale3 import Sale_Form
         # 在每次点击按钮时检查是否已经存在对话框对象，如果存在则直接显示，否则创建新的对话框对象
         # if not self.dialog:
         self.dialog = QDialog()

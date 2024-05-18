@@ -61,6 +61,9 @@ class competeAnalysis_Dialog(object):
 
         self.pushButton.clicked.connect(self.detailInformation)
 
+        Dialog.setStyleSheet("background-color: #ffffff ;")
+        from PyQt5.QtGui import QIcon
+        Dialog.setWindowIcon(QIcon("util/huohuo.png"))
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "竞品分析"))
@@ -108,9 +111,9 @@ class competeAnalysis_Dialog(object):
 
         from detailinformation3 import detailinformation_Dialog
         self.optimal_dialog = QDialog()
-        ui = detailinformation_Dialog()
+        ui = detailinformation_Dialog(product_id1,product_id2)
         ui.setupUi(self.optimal_dialog)
-        ui.PicShow(product_id1,product_id2)
+        ui.PicShow()
         self.optimal_dialog.exec_()
 
 if __name__ == "__main__":

@@ -9,75 +9,202 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
-
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QMessageBox
+from PyQt5.QtCore import QObject, QThread, pyqtSignal
+import time
+import sys
+from PyQt5.QtWidgets import QApplication, QDialog
+import cv2
+import matplotlib.pyplot as plt
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QDialog
+from PyQt5.QtGui import QPixmap, QImage
+from PyQt5.QtCore import Qt
 class AnalysisPlantform_Dialog(object):
+
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(579, 450)
+        Dialog.resize(739, 450)
         self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(130, 30, 131, 21))
+        self.label.setGeometry(QtCore.QRect(290, 30, 131, 21))
         font = QtGui.QFont()
         font.setFamily("幼圆")
         font.setPointSize(14)
         self.label.setFont(font)
         self.label.setObjectName("label")
         self.horizontalLayoutWidget = QtWidgets.QWidget(Dialog)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(70, 80, 191, 111))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(70, 80, 321, 111))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.pic1 = QtWidgets.QLabel(self.horizontalLayoutWidget)
-        self.pic1.setObjectName("pic1")
-        self.horizontalLayout.addWidget(self.pic1)
+        self.picture1 = QtWidgets.QLabel(self.horizontalLayoutWidget)
+        self.picture1.setObjectName("picture1")
+        self.picture1.setFixedSize(111, 111)
+        self.horizontalLayout.addWidget(self.picture1)
         self.color1 = QtWidgets.QLabel(self.horizontalLayoutWidget)
         self.color1.setObjectName("color1")
         self.horizontalLayout.addWidget(self.color1)
         self.horizontalLayoutWidget_2 = QtWidgets.QWidget(Dialog)
-        self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(70, 220, 191, 111))
+        self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(70, 220, 321, 111))
         self.horizontalLayoutWidget_2.setObjectName("horizontalLayoutWidget_2")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_2)
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.pic2_2 = QtWidgets.QLabel(self.horizontalLayoutWidget_2)
-        self.pic2_2.setObjectName("pic2_2")
-        self.horizontalLayout_2.addWidget(self.pic2_2)
+        self.picture2 = QtWidgets.QLabel(self.horizontalLayoutWidget_2)
+        self.picture2.setObjectName("picture2")
+        self.picture2.setFixedSize(111, 111)
+        self.horizontalLayout_2.addWidget(self.picture2)
         self.color2 = QtWidgets.QLabel(self.horizontalLayoutWidget_2)
         self.color2.setObjectName("color2")
         self.horizontalLayout_2.addWidget(self.color2)
         self.label_6 = QtWidgets.QLabel(Dialog)
-        self.label_6.setGeometry(QtCore.QRect(80, 200, 54, 12))
+        self.label_6.setGeometry(QtCore.QRect(110, 200, 54, 12))
         self.label_6.setObjectName("label_6")
         self.label_7 = QtWidgets.QLabel(Dialog)
-        self.label_7.setGeometry(QtCore.QRect(180, 200, 54, 12))
+        self.label_7.setGeometry(QtCore.QRect(250, 200, 100, 12))
         self.label_7.setObjectName("label_7")
         self.label_8 = QtWidgets.QLabel(Dialog)
-        self.label_8.setGeometry(QtCore.QRect(80, 340, 54, 12))
+        self.label_8.setGeometry(QtCore.QRect(110, 340, 54, 12))
         self.label_8.setObjectName("label_8")
         self.label_9 = QtWidgets.QLabel(Dialog)
-        self.label_9.setGeometry(QtCore.QRect(180, 340, 54, 12))
+        self.label_9.setGeometry(QtCore.QRect(250, 340, 100, 12))
         self.label_9.setObjectName("label_9")
         self.label_2 = QtWidgets.QLabel(Dialog)
-        self.label_2.setGeometry(QtCore.QRect(440, 360, 41, 21))
+        self.label_2.setGeometry(QtCore.QRect(600, 360, 41, 40))
         self.label_2.setObjectName("label_2")
         self.textBrowser = QtWidgets.QTextBrowser(Dialog)
-        self.textBrowser.setGeometry(QtCore.QRect(280, 80, 251, 251))
+        self.textBrowser.setGeometry(QtCore.QRect(440, 80, 251, 251))
         self.textBrowser.setObjectName("textBrowser")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
+        pixmap = QPixmap('util/huohuo.png')
+        self.label_2.setPixmap(pixmap)
+        Dialog.setStyleSheet("background-color: #ffffff ;")
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "竞品分析平台"))
         self.label.setText(_translate("Dialog", "竞品分析平台"))
-        self.pic1.setText(_translate("Dialog", "TextLabel"))
+        self.picture1.setText(_translate("Dialog", "TextLabel"))
         self.color1.setText(_translate("Dialog", "TextLabel"))
-        self.pic2_2.setText(_translate("Dialog", "TextLabel"))
+        self.picture2.setText(_translate("Dialog", "TextLabel"))
         self.color2.setText(_translate("Dialog", "TextLabel"))
-        self.label_6.setText(_translate("Dialog", "商品1名称"))
-        self.label_7.setText(_translate("Dialog", "商品1色彩"))
-        self.label_8.setText(_translate("Dialog", "商品2名称"))
-        self.label_9.setText(_translate("Dialog", "商品2色彩"))
-        self.label_2.setText(_translate("Dialog", "logo"))
+        self.label_6.setText(_translate("Dialog", "商品1主图"))
+        self.label_7.setText(_translate("Dialog", "商品1色彩分布图"))
+        self.label_8.setText(_translate("Dialog", "商品2主图"))
+        self.label_9.setText(_translate("Dialog", "商品2色彩分布图"))
+        # self.label_2.setText(_translate("Dialog", "logo"))
+
+    def show_image_and_histogram(self, ID1, ID2):
+        # 读取图像
+        image1 = cv2.imread('./Picture/{}.jpg'.format(ID1))
+
+        # 将图像拆分成 RGB 通道
+        r_channel1 = image1[:, :, 2]
+        g_channel1 = image1[:, :, 1]
+        b_channel1 = image1[:, :, 0]
+
+        # 计算每个通道的直方图
+        hist_r1 = cv2.calcHist([r_channel1], [0], None, [256], [0, 256])
+        hist_g1 = cv2.calcHist([g_channel1], [0], None, [256], [0, 256])
+        hist_b1 = cv2.calcHist([b_channel1], [0], None, [256], [0, 256])
+
+        # 绘制 RGB 曲线
+        plt.plot(hist_r1, color='red', label='Red')
+        plt.plot(hist_g1, color='green', label='Green')
+        plt.plot(hist_b1, color='blue', label='Blue')
+        plt.xlabel('Pixel Intensity')
+        plt.ylabel('Frequency')
+        plt.title('RGB Histogram')
+        plt.legend()
+        plt.savefig('histogram\{}.png'.format(ID1))
+
+        # 显示原始图像
+        image_label = QLabel()
+        pixmap = QPixmap('./Picture/{}.jpg'.format(ID1))  # 替换为实际的图像路径
+        image_label.setPixmap(pixmap)
+        self.picture1.setPixmap(pixmap)
+        self.picture1.setScaledContents(True)
+
+        image_label = QLabel()
+        pixmap = QPixmap('./histogram/{}.png'.format(ID1))  # 替换为实际的图像路径
+        image_label.setPixmap(pixmap)
+        self.color1.setPixmap(pixmap)
+        self.color1.setScaledContents(True)
+
+        # 读取图像
+        image2 = cv2.imread('./Picture/{}.jpg'.format(ID2))
+
+        # 将图像拆分成 RGB 通道
+        r_channel2 = image2[:, :, 2]
+        g_channel2 = image2[:, :, 1]
+        b_channel2 = image2[:, :, 0]
+
+        # 计算每个通道的直方图
+        hist_r2 = cv2.calcHist([r_channel2], [0], None, [256], [0, 256])
+        hist_g2 = cv2.calcHist([g_channel2], [0], None, [256], [0, 256])
+        hist_b2 = cv2.calcHist([b_channel2], [0], None, [256], [0, 256])
+
+        # 绘制 RGB 曲线
+        plt.plot(hist_r2, color='red', label='Red')
+        plt.plot(hist_g2, color='green', label='Green')
+        plt.plot(hist_b2, color='blue', label='Blue')
+        plt.xlabel('Pixel Intensity')
+        plt.ylabel('Frequency')
+        plt.title('RGB Histogram')
+        plt.legend()
+        plt.savefig('histogram\{}.png'.format(ID2))
+
+        # 显示原始图像
+        image_label = QLabel()
+        pixmap = QPixmap('./Picture/{}.jpg'.format(ID2))  # 替换为实际的图像路径
+        image_label.setPixmap(pixmap)
+        self.picture2.setPixmap(pixmap)
+        self.picture2.setScaledContents(True)
+
+        image_label = QLabel()
+        pixmap = QPixmap('./histogram/{}.png'.format(ID2))  # 替换为实际的图像路径
+        image_label.setPixmap(pixmap)
+        self.color2.setPixmap(pixmap)
+        self.color2.setScaledContents(True)
+
+        import advertisement
+        adv1 = advertisement.getAdvertisement(ID1)
+        adv2 = advertisement.getAdvertisement(ID2)
+        # adv1 = "12212"
+        # adv2 = "2222"
+        result1 = "商品1的广告词是" + adv1
+        result2 = "商品2的广告词是" + adv2
+        self.textBrowser.setText(result1 +"\n"+ result2)
+
+if __name__ == "__main__":
+    import sys
+
+    # QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
+    #
+    # app = QtWidgets.QApplication(sys.argv)
+    #
+    # Form = QtWidgets.QWidget()
+    # ui = AnalysisPlantform_Dialog()
+    # ui.setupUi(Form)
+    # ui.show_image_and_histogram("10072795033886","10099263767130")
+    # Form.show()
+    # sys.exit(app.exec_())
+
+
+    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
+
+    app = QApplication(sys.argv)
+
+    # 创建一个 QDialog 对象来显示界面
+    dialog = QDialog()
+
+    # 使用 Sale_Form 类来设置界面
+    ui = AnalysisPlantform_Dialog()
+    ui.setupUi(dialog)
+    ui.show_image_and_histogram("10072795033886", "10099263767130")
+    # 显示对话框
+    dialog.exec_()
+
+    sys.exit(app.exec_())

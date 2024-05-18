@@ -15,6 +15,9 @@ from PyQt5.QtCore import QObject, QThread, pyqtSignal
 import time
 
 class detailinformation_Dialog(object):
+    def __init__(self, product_id1, product_id2):
+        self.product_id1 = product_id1
+        self.product_id2 = product_id2
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(414, 435)
@@ -89,10 +92,12 @@ class detailinformation_Dialog(object):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
         self.pushButton.clicked.connect(self.openPlantform)
-
+        Dialog.setStyleSheet("background-color: #ffffff ;")
+        from PyQt5.QtGui import QIcon
+        Dialog.setWindowIcon(QIcon("util/huohuo.png"))
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "商品分析"))
         self.label.setText(_translate("Dialog", "情况概览"))
         self.itemid2.setText(_translate("Dialog", "TextLabel"))
         self.label_4.setText(_translate("Dialog", "名称"))
@@ -110,7 +115,9 @@ class detailinformation_Dialog(object):
         self.pushButton.setText(_translate("Dialog", "了解更多"))
 
 
-    def PicShow(self,product_id1,product_id2):
+    def PicShow(self):
+        product_id1 = self.product_id1
+        product_id2 = self.product_id2
         print("running pic show")
         from PyQt5.QtGui import QPixmap
         #图片展示
@@ -177,11 +184,31 @@ class detailinformation_Dialog(object):
 
 
     def openPlantform(self):
+
         from Analysisplantform import AnalysisPlantform_Dialog
-        self.optimal_dialog = QDialog()
+        # self.optimal_dialog = QDialog()
+        # self.ui = AnalysisPlantform_Dialog()
+        print(self.product_id1, self.product_id2)
+
+        # self.ui.show_image_and_histogram("10072795033886","10099263767130")
+        # self.ui.setupUi(self.optimal_dialog)
+        # self.optimal_dialog.exec_()
+
+        # self.Form = QtWidgets.QWidget()
+        # ui = AnalysisPlantform_Dialog()
+        # ui.setupUi(self.Form)
+        # ui.show_image_and_histogram(self.product_id1,self.product_id2)
+        # self.Form.show()
+
+
+        dialog = QDialog()
+
+        # 使用 Sale_Form 类来设置界面
         ui = AnalysisPlantform_Dialog()
-        ui.setupUi(self.optimal_dialog)
-        self.optimal_dialog.exec_()
+        ui.setupUi(dialog)
+        ui.show_image_and_histogram(self.product_id1, self.product_id1)
+        # 显示对话框
+        dialog.exec_()
 
 if __name__ == "__main__":
     QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
@@ -192,9 +219,10 @@ if __name__ == "__main__":
     dialog = QDialog()
 
     # 使用 Sale_Form 类来设置界面
-    ui = detailinformation_Dialog()
+    ui = detailinformation_Dialog("10072795033886","10099263767130")
     ui.setupUi(dialog)
-    ui.PicShow("10099263767130","10072795033886")
+    # ui.PicShow()
+    ui.openPlantform()
     # 显示对话框
     dialog.show()
 

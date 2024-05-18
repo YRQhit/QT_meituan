@@ -39,7 +39,9 @@ class EmotionScore(QDialog):
         # self.addWidget.setFixedSize(400, 300)
         # self.imageLabel.setGeometry(370, 210, 54, 12)
         self.setLayout(layout)
-
+        self.setStyleSheet("background-color: #ffffff ;")
+        from PyQt5.QtGui import QIcon
+        self.setWindowIcon(QIcon("util/huohuo.png"))
     def show_snowNLP_distribution(self, data, ID):
         # column_data = data.iloc[:, 1]
         column_data = []
