@@ -1,8 +1,8 @@
 # QT_meituan
 ## 这个项目起源于美团商业比赛，具体架构如下
 
-![image](PIC/架构.jpg )
-
+<!-- ![image](PIC/架构.jpg ) -->
+![image](https://github.com/YRQhit/QT_meituan/blob/main/PIC/%E6%9E%B6%E6%9E%84.jpg)
 ## 具体的代码架构如下
 ![image](PIC/代码架构.png )
 
