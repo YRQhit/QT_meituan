@@ -105,7 +105,7 @@ class Suggest_Dialog(object):
         print("从下面的评论中得到这个产品的优势和缺点:"+comment)
 
         import zhipuai
-        zhipuai.api_key ="a2c3696675d0914c53ce693fd9ab51a2.mHp0Uz5xbTB9OHAL"#填写控制台中获取的 APIKey 信息
+        zhipuai.api_key ="XXXXXXXX"#填写控制台中获取的 APIKey 信息,此处使用质谱AI
         model ="chatglm_std"#用于配置大模型版本
 
         def getText(role, content, text = []):
